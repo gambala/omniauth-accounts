@@ -16,9 +16,9 @@ module OmniAuth
         :token_url     => '/access_token'
       }
 
-      # def authorize_params
+      def authorize_params
       #   base_scope_url = "https://www.googleapis.com/auth/"
-      #   super.tap do |params|
+        super.tap do |params|
       #     # Read the params if passed directly to omniauth_authorize_path
       #     options[:authorize_options].each do |k|
       #       params[k] = request.params[k.to_s] unless [nil, ''].include?(request.params[k.to_s])
@@ -32,9 +32,9 @@ module OmniAuth
       #     params[:approval_prompt] = 'force' if params[:approval_prompt].nil?
       #     params[:login_hint] = request.params['login_hint'] if request.params['login_hint']
       #     # Override the state per request
-      #     session['omniauth.state'] = params[:state] if request.params['state']
-      #   end
-      # end
+          session['omniauth.state'] = params[:state] if request.params['state']
+        end
+      end
 
       uid{ raw_info['id'] || verified_email }
 
