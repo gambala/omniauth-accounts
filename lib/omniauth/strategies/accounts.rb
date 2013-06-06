@@ -11,9 +11,9 @@ module OmniAuth
       # option :authorize_options, [:scope, :approval_prompt, :access_type, :state, :hd]
 
       option :client_options, {
-        :site          => 'http://localhost:4000',
-        :authorize_url => '/o/oauth2/auth',
-        :token_url     => '/o/oauth2/token'
+        :site          => 'http://localhost:3000',
+        :authorize_url => '/authorize',
+        :token_url     => '/access_token'
       }
 
       # def authorize_params
