@@ -1,33 +1,107 @@
-require 'omniauth/strategies/oauth2'
+require 'omniauth-oauth2'
+require 'multi_json'
 
 module OmniAuth
-  module Strategies
-    # class Doorkeeper < OmniAuth::Strategies::OAuth2
-    class Accounts < OmniAuth::Strategies::OAuth2
-      # change the class name and the :name option to match your application name
-      # option :name, :doorkeeper
-      option :name, :accounts
+ module Strategies
+  class Accounts < OmniAuth::Strategies::OAuth2
 
-      option :client_options, {
-        :site => "http://localhost:3000",
-        :authorize_url => "/oauth/authorize"
+    option :name, "accounts"
+    option :client_options, {
+      :site =>  'http://localhost:3000',
+      :authorize_url => "/authorize",
+      :access_token_url => "/access_token"
+    }
+
+   # def initialize(app, api_key = nil, secret_key = nil, options = {}, &block)
+   #   client_options = {
+   #    :site =>  'http://localhost:3000',
+   #    :authorize_url => "/authorize",
+   #    :access_token_url => "/access_token"
+   #   }
+   #   super(app, :accounts, api_key, secret_key, client_options, &block)
+   # end
+
+    uid{ raw_info['id'] }
+
+    info do
+      {
+        :name => raw_info['name'],
+        :email => raw_info['email']
       }
-
-      uid { raw_info["id"] }
-
-      info do
-        {
-          :email => raw_info["info"]["email"]
-          # and anything else you want to return to your API consumers
-        }
-      end
-
-      def raw_info
-        @raw_info ||= access_token.get('/access_token.json').parsed
-      end
     end
+
+    extra do
+      {
+        'raw_info' => raw_info
+      }
+    end
+
+    def raw_info
+      @raw_info ||= access_token.get('/account.json?access_token='+access_token.token+'&client='+access_token.client.id).parsed
+    end
+
+# protected
+
+#    def user_data
+#      @data ||= MultiJson.decode(@access_token.get("/account.json"))
+#    end
+
+#    def request_phase
+#      options[:scope] ||= "read"
+#      super
+#    end
+
+#    def user_hash
+#      user_data
+#    end
+
+#    def auth_hash
+#      OmniAuth::Utils.deep_merge(super, {
+#        'uid' => user_data["uid"],
+#        'user_info' => user_data['user_info'],
+#        'extra' => {
+#          'admin' => user_data['extra']['admin'],
+#          'first_name' => user_data['extra']['first_name'],
+#          'last_name' => user_data['extra']['last_name'],
+#        }
+#      })
+#    end
   end
+ end
 end
+
+
+# require 'omniauth/strategies/oauth2'
+
+# module OmniAuth
+#   module Strategies
+#     # class Doorkeeper < OmniAuth::Strategies::OAuth2
+#     class Accounts < OmniAuth::Strategies::OAuth2
+#       # change the class name and the :name option to match your application name
+#       # option :name, :doorkeeper
+#       option :name, :accounts
+
+#       option :client_options, {
+#         :site => "http://localhost:3000",
+#         :authorize_url => "/authorize",
+#         :access_token_url => "/access_token"
+#       }
+
+#       uid { raw_info["id"] }
+
+#       info do
+#         {
+#           :email => raw_info["info"]["email"]
+#           # and anything else you want to return to your API consumers
+#         }
+#       end
+
+#       def raw_info
+#         @raw_info ||= access_token.get('/access_token.json').parsed
+#       end
+#     end
+#   end
+# end
 
 
 # module OmniAuth
