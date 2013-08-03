@@ -4,8 +4,8 @@ Strategy to authenticate via OAuth2 in OmniAuth.
 
 Worked with some demo-projects:
 
-- [provider-site](http://github.com/gambala/demo-omniauth-provider-site)
-- [client-site](http://github.com/gambala/demo-omniauth-client-site)
+- [provider-site](http://github.com/gambala/demo-sso-provider)
+- [client-site](http://github.com/gambala/demo-sso-client)
 
 ## Installation
 
