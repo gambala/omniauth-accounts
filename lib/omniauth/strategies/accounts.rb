@@ -7,7 +7,7 @@ module OmniAuth
 
     option :name, "accounts"
     option :client_options, {
-      :site =>  'http://localhost:3000',
+      :site => 'http://accounts.fromfuture.net',
       :authorize_url => "/authorize",
       :access_token_url => "/access_token"
     }
