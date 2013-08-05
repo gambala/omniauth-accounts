@@ -9,7 +9,7 @@ module OmniAuth
     option :client_options, {
       :site => 'http://accounts.fromfuture.net',
       :authorize_url => "/authorize",
-      :access_token_url => "/access_token"
+      :access_token_url => "/token"
     }
 
     uid{ raw_info['id'] }
