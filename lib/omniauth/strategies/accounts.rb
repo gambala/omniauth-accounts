@@ -16,8 +16,16 @@ module OmniAuth
 
     info do
       {
-        :name => raw_info['name'],
-        :email => raw_info['email']
+        email: raw_info['email'],
+        name: raw_info['name'],
+        nickname: raw_info['nickname'],
+        first_name: raw_info['first_name'],
+        last_name: raw_info['last_name'],
+        image: raw_info['image'],
+        urls: raw_info['urls'],
+        location: raw_info['location'],
+        sex: raw_info['sex'],
+        born_date: raw_info['born_date']
       }
     end
 
@@ -28,7 +36,7 @@ module OmniAuth
     end
 
     def raw_info
-      @raw_info ||= access_token.get('/account.json?access_token='+access_token.token+'&client='+access_token.client.id).parsed
+      @raw_info ||= access_token.get('/hash.json?access_token='+access_token.token+'&client='+access_token.client.id).parsed
     end
 
   end
