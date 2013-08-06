@@ -36,7 +36,7 @@ module OmniAuth
     end
 
     def raw_info
-      @raw_info ||= access_token.get('/hash.json?access_token='+access_token.token+'&client='+access_token.client.id).parsed
+      @raw_info ||= access_token.get('/get_info.json?access_token='+access_token.token+'&client='+access_token.client.id).parsed
     end
 
   end
