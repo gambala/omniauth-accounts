@@ -6,9 +6,9 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Vitaliy Emeliyatsev"]
   gem.email         = ["gambala.rus@gmail.com"]
-  gem.description   = %q{A Accounts From the Future oauth2 strategy for OmniAuth 1.0}
-  gem.summary       = %q{A Accounts From the Future oauth2 strategy for OmniAuth 1.0}
-  gem.homepage      = ""
+  gem.description   = %q{A Accounts from the Future oauth2 strategy for OmniAuth 1.0}
+  gem.summary       = %q{A simple oauth 2.0 strategy}
+  gem.homepage      = "https://github.com/gambala/omniauth-accounts"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
