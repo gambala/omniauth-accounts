@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.name          = "omniauth-accounts"
   gem.require_paths = ["lib"]
   gem.version       = OmniAuth::Accounts::VERSION
+  gem.license       = 'MIT'
 
   gem.add_runtime_dependency 'omniauth-oauth2'
 
