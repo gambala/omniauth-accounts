@@ -5,14 +5,19 @@ module OmniAuth
  module Strategies
   class Accounts < OmniAuth::Strategies::OAuth2
 
-    option :name, "accounts"
+    option :name, 'accounts'
     option :client_options, {
-      :site => 'http://accounts.fromfuture.net',
-      :authorize_url => "/authorize",
-      :access_token_url => "/token"
+      site: 'http://accounts.fromfuture.net',
+      authorize_url: '/authorize',
+      access_token_url: '/token'
+    }
+    option :token_params, {
+      parse: :json
     }
 
-    uid{ raw_info['id'] }
+    uid do
+      raw_info['id']
+    end
 
     info do
       {
@@ -31,12 +36,12 @@ module OmniAuth
 
     extra do
       {
-        'raw_info' => raw_info
+        raw_info: raw_info
       }
     end
 
     def raw_info
-      @raw_info ||= access_token.get('/get_info.json?access_token='+access_token.token+'&client='+access_token.client.id).parsed
+      @raw_info ||= access_token.get('/get_info', params: { access_token: access_token.token, client: access_token.client.id }, parse: :json).parsed
     end
 
   end
